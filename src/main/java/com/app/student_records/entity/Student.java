@@ -17,9 +17,41 @@ public class Student {
     @Column(name = "phone")
     private String phone;
 
-    @Column(name = "dob")
-    private String dob;
+    @Column(name = "birth_date")
+    private String birth_date;
 
     @Column(name = "grade")
     private String grade;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getBirth_date() {
+        return birth_date;
+    }
+
+    public void setBirth_date(String birth_date) {
+        this.birth_date = birth_date;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
 }
