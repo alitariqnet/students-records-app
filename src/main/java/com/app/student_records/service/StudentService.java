@@ -62,21 +62,23 @@ public class StudentService {
     }
 
     public void store(MultipartFile file) throws IOException {
+
         String fileContent = new String(file.getBytes(), StandardCharsets.UTF_8);
         String[] records = fileContent.split("\n");
         log.info("Records: ", records);
-        List<Student> students = null;
+        List<Student> students = new LinkedList<>();
         for (int i = 0; i < records.length; i++) {
-            students = new LinkedList<>();
             if (i == 0) continue;
             else {
                 String record = records[i];
-                String[] values = record.replace("\t", "").replace("\r", "").replace("\n", "").replace("|", "").split(" ");
+                String[] values = record.replace("\t", "").replace("\r", "").replace("\n", "").split("\\|");
+
                 Student student = new Student();
                 student.setName(values[0].trim());
                 student.setPhone(values[1].trim());
                 student.setBirthDate(LocalDate.parse(values[2].trim()));
                 student.setGrade(values[3].trim());
+
                 log.info("New student record parsed", student);
                 students.add(student);
             }

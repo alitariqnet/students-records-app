@@ -1,0 +1,7 @@
+Student Name | Phone | Birth_date | Grade
+Sabir	| 093424577 | 1984-10-26 | A 
+Hamid   | 093424354 | 1989-03-24 | A 
+Mujahid	| 093424123 | 1983-12-20 | B 
+Umar	| 093424564 | 1980-08-12 | B 
+Hasan	| 093424968 | 1987-03-21 | A 
+Bilal	| 093424980 | 1992-02-19 | B 
