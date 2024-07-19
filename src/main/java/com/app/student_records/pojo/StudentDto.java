@@ -1,9 +1,19 @@
 package com.app.student_records.pojo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
+@JsonRootName("student")
 public class StudentDto {
+    @JsonProperty("name")
     private String name;
+    @JsonProperty("birth_date")
     private String birthDate;
+    @JsonProperty("phone")
     private String phone;
+    @JsonProperty("grade")
     private String grade;
 
     public String getName() {
