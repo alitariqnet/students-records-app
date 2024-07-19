@@ -3,6 +3,8 @@ package com.app.student_records.entity;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "students")
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -18,7 +20,7 @@ public class Student {
     private String phone;
 
     @Column(name = "birth_date")
-    private String birth_date;
+    private LocalDate birthDate;
 
     @Column(name = "grade")
     private String grade;
@@ -39,12 +41,12 @@ public class Student {
         this.phone = phone;
     }
 
-    public String getBirth_date() {
-        return birth_date;
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
-    public void setBirth_date(String birth_date) {
-        this.birth_date = birth_date;
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getGrade() {
