@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,24 +25,46 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-    public Student save(StudentDto studentDto){
+    public Student save(StudentDto studentDto) {
         Student student = new Student();
         student.setName(studentDto.getName());
         student.setGrade(studentDto.getGrade());
         student.setPhone(studentDto.getPhone());
         student.setBirthDate(LocalDate.parse(studentDto.getBirthDate()));
-        log.info("About to create a new student",student);
+        log.info("About to create a new student", student);
         return studentRepository.save(student);
     }
 
-    public Optional<Student> find(Long id){
+    public Optional<Student> find(Long id) {
         return studentRepository.findById(id);
+    }
+
+    public List<Student> findStudents(String name, String phone, String grade) {
+        Specification<Student> nameSpec = null;
+        if (null!=name && !name.isEmpty()) {
+            nameSpec = (root, query, builder) -> {
+                return builder.equal(root.get("name"), name);
+            };
+        }
+        Specification<Student> phoneSpec = null;
+        if (null!=phone && !phone.isEmpty()) {
+            phoneSpec = (root, query, builder) -> {
+                return builder.equal(root.get("phone"), phone);
+            };
+        }
+        Specification<Student> gradeSpec = null;
+        if (null!=grade && !grade.isEmpty()) {
+            gradeSpec = (root, query, builder) -> {
+                return builder.equal(root.get("grade"), grade);
+            };
+        }
+        return studentRepository.findAll(nameSpec.and(phoneSpec.and(gradeSpec)));
     }
 
     public void store(MultipartFile file) throws IOException {
         String fileContent = new String(file.getBytes(), StandardCharsets.UTF_8);
         String[] records = fileContent.split("\n");
-        log.info("Records: ",records);
+        log.info("Records: ", records);
         List<Student> students = null;
         for (int i = 0; i < records.length; i++) {
             students = new LinkedList<>();

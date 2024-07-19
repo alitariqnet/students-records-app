@@ -9,15 +9,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import static com.app.student_records.mapper.StudentMapper.studentToStudentDto;
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @RestController
 public class StudentController {
@@ -48,6 +51,13 @@ public class StudentController {
             log.warn("Student was not found with id: "+id);
             return new ResponseEntity<>(null, HttpStatus.OK);
             }
+    }
+
+    @GetMapping("/students")
+    public ResponseEntity<List<Student>> findStudents(@RequestParam @Nullable String name, @RequestParam @Nullable String phone, @RequestParam @Nullable String grade) {
+        List<Student> students = studentService.findStudents(name, phone, grade);
+            log.info("Students found ", students);
+            return new ResponseEntity<>(students, HttpStatus.OK);
     }
 
     @PostMapping(name = "/api/v1/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
