@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -33,8 +34,26 @@ public class StudentService {
         }
         return student.get();
     }
-    public void store(MultipartFile file) throws IOException {
 
-        InputStream inputStream = file.getInputStream();
-    }
+    public void store(MultipartFile file) throws IOException {
+        String fileContent = new String(file.getBytes(), StandardCharsets.UTF_8);
+        String[] records = fileContent.split("\n");
+        System.out.println(records);
+        for (int i =0;i<records.length;i++){
+            if(i==0) continue;
+            else{
+                String record = records[i];
+//                record = record.replace("\t","");
+//                record = record.replace("\n","");
+                String[] values = record.replace("\t","").replace("\r","").replace("\n","").replace("|","").replace("  "," ").split(" ");
+                Student student = new Student();
+                student.setName(values[0].trim());
+                student.setPhone(values[1].trim());
+                student.setBirthDate(LocalDate.parse(values[2].trim()));
+                student.setGrade(values[3].trim());
+                studentRepository.save(student);
+                }
+            }
+        }
+
 }
