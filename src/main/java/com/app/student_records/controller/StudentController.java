@@ -20,13 +20,13 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.app.student_records.mapper.StudentMapper.studentToStudentDto;
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @RestController
 public class StudentController {
 
 
     private static final Logger log = LoggerFactory.getLogger(StudentController.class);
+
     private StudentService studentService;
 
     public StudentController(StudentService studentService) {
@@ -36,7 +36,7 @@ public class StudentController {
     @PostMapping("/create")
     public ResponseEntity<Student> createStudent(@RequestBody StudentDto studentDto) {
         Student student = studentService.save(studentDto);
-        log.info("New student created.");
+        log.info("New student created."+ student.toString());
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
@@ -44,7 +44,7 @@ public class StudentController {
     public ResponseEntity<StudentDto> findStudent(@RequestParam Long id) {
         Optional<Student> student = studentService.find(id);
         if(student.isPresent()) {
-            log.info("Student found ", student.get());
+            log.info("Student found " + student.get().toString());
             return new ResponseEntity<>(studentToStudentDto(student.get()), HttpStatus.OK);
         }
         else{
@@ -56,7 +56,7 @@ public class StudentController {
     @GetMapping("/students")
     public ResponseEntity<List<Student>> findStudents(@RequestParam @Nullable String name, @RequestParam @Nullable String phone, @RequestParam @Nullable String grade) {
         List<Student> students = studentService.findStudents(name, phone, grade);
-            log.info("Students found ", students);
+            log.info("Students found ", students.toString());
             return new ResponseEntity<>(students, HttpStatus.OK);
     }
 

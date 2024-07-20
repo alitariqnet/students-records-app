@@ -47,4 +47,14 @@ public class StudentDto {
     public void setGrade(String grade) {
         this.grade = grade;
     }
+
+    @Override
+    public String toString() {
+        return "StudentDto{" +
+                "name='" + name + '\'' +
+                ", birthDate='" + birthDate + '\'' +
+                ", phone='" + phone + '\'' +
+                ", grade='" + grade + '\'' +
+                '}';
+    }
 }
