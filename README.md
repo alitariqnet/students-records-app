@@ -14,3 +14,6 @@ This app takes a uploaded text file which contains students' records and parses 
 **Helping screenshots**
 ![image](https://github.com/user-attachments/assets/34d2bd4a-a4e4-4926-8bee-4daa0238a6e9)
 ![image](https://github.com/user-attachments/assets/564756ec-3003-4b16-b520-b668c778b2d6)
+
+**File parsing per record logging**
+![image](https://github.com/user-attachments/assets/838cc549-e50f-4267-9778-72139d09af91)
