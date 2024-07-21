@@ -27,12 +27,17 @@ public class StudentService {
     }
 
     public Student save(StudentDto studentDto) {
-        Student student = new Student();
-        student.setName(studentDto.getName());
-        student.setGrade(studentDto.getGrade());
-        student.setPhone(studentDto.getPhone());
-        student.setBirthDate(LocalDate.parse(studentDto.getBirthDate()));
-        log.info("About to create a new student", student);
+        Student student = null;
+        try {
+            student = new Student();
+            student.setName(studentDto.getName());
+            student.setGrade(studentDto.getGrade());
+            student.setPhone(studentDto.getPhone());
+            student.setBirthDate(LocalDate.parse(studentDto.getBirthDate()));
+            log.info("About to create a new student", student);
+        } catch (Exception e) {
+            log.error("Error occured while saving a new student record." + e.getMessage());
+        }
         return studentRepository.save(student);
     }
 
@@ -64,28 +69,32 @@ public class StudentService {
 
     public void store(MultipartFile file) throws IOException {
 
-        String fileContent = new String(file.getBytes(), StandardCharsets.UTF_8);
-        String[] records = fileContent.split("\n");
-        List<Student> students = new LinkedList<>();
+        try {
+            String fileContent = new String(file.getBytes(), StandardCharsets.UTF_8);
+            String[] records = fileContent.split("\n");
+            List<Student> students = new LinkedList<>();
 
-        for (int i = 0; i < records.length; i++) {
-            if (i == 0)
-                continue;
-            else {
-                String record = records[i];
-                String[] values = record.replace("\t", "").replace("\r", "").replace("\n", "").split("\\|");
+            for (int i = 0; i < records.length; i++) {
+                if (i == 0)
+                    continue;
+                else {
+                    String record = records[i];
+                    String[] values = record.replace("\t", "").replace("\r", "").replace("\n", "").split("\\|");
 
-                Student student = new Student();
-                student.setName(values[0].trim());
-                student.setPhone(values[1].trim());
-                student.setBirthDate(LocalDate.parse(values[2].trim()));
-                student.setGrade(values[3].trim());
+                    Student student = new Student();
+                    student.setName(values[0].trim());
+                    student.setPhone(values[1].trim());
+                    student.setBirthDate(LocalDate.parse(values[2].trim()));
+                    student.setGrade(values[3].trim());
 
-                log.info("New student record parsed "+ student.toString());
-                students.add(student);
+                    log.info("New student record parsed " + student.toString());
+                    students.add(student);
+                }
             }
+            studentRepository.saveAll(students);
+        }catch(Exception e){
+            log.error("Error occured during parsing file"+e.getMessage());
         }
-        studentRepository.saveAll(students);
     }
 
 }

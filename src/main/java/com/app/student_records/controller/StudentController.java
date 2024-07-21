@@ -70,6 +70,7 @@ public class StudentController {
     @GetMapping("/")
     public ModelAndView uploadPage(Model model) throws IOException {
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("message","Please upload the file");
         modelAndView.setViewName("uploadform.html");
         log.info("Sending uploadform.html as view");
         return modelAndView;
