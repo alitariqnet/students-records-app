@@ -3,7 +3,8 @@ This app takes a uploaded text file which contains students' records and parses 
 ![image](https://github.com/user-attachments/assets/c94166ca-87eb-4eb6-85f3-8bdba625b128)
 
 **Running application upload form**
-![image](https://github.com/user-attachments/assets/e248e8ad-b439-479b-84e6-90186905acbc)
+![image](https://github.com/user-attachments/assets/cced9847-523e-4b0a-b52b-c1e2374fa1dc)
+
 
 **Swagger UI API documentation url**
 ![image](https://github.com/user-attachments/assets/ac172d79-a7f3-439d-bd34-4e74e1743964)
