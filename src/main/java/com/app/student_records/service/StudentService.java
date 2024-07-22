@@ -64,7 +64,32 @@ public class StudentService {
                 return builder.equal(root.get("grade"), grade);
             };
         }
-        return studentRepository.findAll(nameSpec.and(phoneSpec.and(gradeSpec)));
+        List<Student> students = new LinkedList<>();
+        if(nameSpec != null && phoneSpec == null && gradeSpec == null){
+            students = studentRepository.findAll(nameSpec);
+        }
+        else if(nameSpec != null && phoneSpec != null && gradeSpec == null){
+            students = studentRepository.findAll(nameSpec.and(phoneSpec));
+        }
+        else if(nameSpec != null && phoneSpec != null && gradeSpec != null){
+            students = studentRepository.findAll(nameSpec.and(phoneSpec.and(gradeSpec)));
+        }
+        else if(nameSpec != null && phoneSpec == null && gradeSpec != null){
+            students = studentRepository.findAll(nameSpec.and(gradeSpec));
+        }
+        else if(nameSpec == null && phoneSpec != null && gradeSpec == null){
+            students = studentRepository.findAll(phoneSpec);
+        }
+        else if(nameSpec == null && phoneSpec == null && gradeSpec != null){
+            students = studentRepository.findAll(gradeSpec);
+        }
+        else if(nameSpec == null && phoneSpec != null && gradeSpec != null){
+            students = studentRepository.findAll(phoneSpec.and(gradeSpec));
+        }
+        else if(nameSpec != null && phoneSpec == null && gradeSpec != null){
+            students = studentRepository.findAll(nameSpec.and(gradeSpec));
+        }
+        return students;
     }
 
     public void store(MultipartFile file) throws IOException {
