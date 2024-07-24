@@ -7,7 +7,8 @@ This app takes a uploaded text file which contains students' records and parses 
 
 
 **Swagger UI API documentation url**
-![image](https://github.com/user-attachments/assets/ac172d79-a7f3-439d-bd34-4e74e1743964)
+![image](https://github.com/user-attachments/assets/8a9fa988-8234-47b0-b4f9-2aa6043b144d)
+
 
 **Postman collection API endpoints with payload**
 [Student-Record-API.postman_collection.json](https://github.com/user-attachments/files/16317797/Student-Record-API.postman_collection.json)
