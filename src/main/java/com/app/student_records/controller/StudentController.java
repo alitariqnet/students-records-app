@@ -60,7 +60,7 @@ public class StudentController {
             return new ResponseEntity<>(students, HttpStatus.OK);
     }
 
-    @PostMapping(name = "/api/v1/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value = "/api/v1/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public String handleUpload(@RequestParam("file") MultipartFile file) throws IOException {
         studentService.store(file);
         log.info("File uploaded successfully");
