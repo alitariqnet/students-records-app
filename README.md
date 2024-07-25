@@ -19,3 +19,10 @@ This app takes a uploaded text file which contains students' records and parses 
 
 **File parsing per record logging**
 ![image](https://github.com/user-attachments/assets/838cc549-e50f-4267-9778-72139d09af91)
+
+**Docker support has been added**
+To run this application in a containerized environment do the following,
+1. In the root folder where Dockerfile is present run this command docker build -t studentrecord .
+2. After it finished to build the image, run docker-compose up
+   It will spin up two containers, one for the student record app and other for the postgreSQL so you
+   no need to install postgreSQL locally.
