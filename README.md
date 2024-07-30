@@ -22,8 +22,8 @@ This app takes a uploaded text file which contains students' records and parses 
 
 ##### Docker support has been added
 ###### To run this application in a containerized environment do the following,
-1. In the root folder where Dockerfile is present run this command docker build -t studentrecord .
-2. After it finishes to build the image, run docker-compose up
+1. In the root folder where Dockerfile is present run this command, docker build -t studentrecord .
+2. After it finishes to build the image, run, docker-compose up
    and it will spin up two containers, one for the student record app and other for the postgreSQL so you
    no need to install postgreSQL locally. Remember one thing, the tag you give to the student app must match with the image value
    under app under services in docker-compose.yml file, otherwise it can cause error due to unable to find that image.
